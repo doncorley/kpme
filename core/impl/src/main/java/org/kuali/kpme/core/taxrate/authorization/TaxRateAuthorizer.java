@@ -37,8 +37,8 @@ public class TaxRateAuthorizer extends KPMEMaintenanceDocumentAuthorizerBase {
 			TaxRate taxRate = (TaxRate) dataObject;
 			
 			if (department != null) {
-				department = taxRate.getDept();
-				location = taxRate.getLocation();
+				department = taxRate.getCountry();
+				location = taxRate.getState();
 			}
 		}
 		

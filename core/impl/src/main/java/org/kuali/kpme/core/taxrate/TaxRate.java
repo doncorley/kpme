@@ -36,20 +36,20 @@ public class TaxRate extends HrBusinessObject {
 	public static final String CACHE_NAME = HrConstants.CacheNamespace.NAMESPACE_PREFIX + "TaxRate";
 	//KPME-2273/1965 Primary Business Keys List.		
 	public static final ImmutableList<String> EQUAL_TO_FIELDS = new ImmutableList.Builder<String>()
-            .add("dept")
-            .add("location")
+            .add("country")
+            .add("state")
             .build();
 
     private String hrTaxRateId;
-    private String dept;
-    private String description;
-    private String location;
+    private String country;
+    private String city;
+    private String state;
     private String chart;
     private String org;
     private String history;
     private boolean payrollApproval;	
 
-    private Location locationObj;
+    private Location stateObj;
     private Chart chartObj;
     private Organization orgObj;
     
@@ -61,7 +61,7 @@ public class TaxRate extends HrBusinessObject {
     
 	@Override
 	public String getUniqueKey() {
-		return getDept() + "_" + getOrg() + "_" + getChart();
+		return getCountry() + "_" + getOrg() + "_" + getChart();
 	}
     
 	@Override
@@ -78,32 +78,32 @@ public class TaxRate extends HrBusinessObject {
 		return hrTaxRateId;
 	}
 
-	public void setHrTaxRateId(String hrDeptId) {
-		this.hrTaxRateId = hrDeptId;
+	public void setHrTaxRateId(String hrTaxRateId) {
+		this.hrTaxRateId = hrTaxRateId;
 	}
 
-	public String getDept() {
-		return dept;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setDept(String dept) {
-		this.dept = dept;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
-    public String getDescription() {
-        return description;
+    public String getCity() {
+        return city;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCity(String city) {
+        this.city = city;
     }
     
-	public String getLocation() {
-		return location;
+	public String getState() {
+		return state;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setState(String state) {
+		this.state = state;
 	}
 
     public String getChart() {
@@ -122,12 +122,12 @@ public class TaxRate extends HrBusinessObject {
         this.org = org;
     }
     
-	public Location getLocationObj() {
-		return locationObj;
+	public Location getStateObj() {
+		return stateObj;
 	}
 
-	public void setLocationObj(Location locationObj) {
-		this.locationObj = locationObj;
+	public void setStateObj(Location stateObj) {
+		this.stateObj = stateObj;
 	}
 
 	public Chart getChartObj() {

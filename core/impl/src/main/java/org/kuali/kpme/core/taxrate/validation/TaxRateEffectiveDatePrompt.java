@@ -28,7 +28,7 @@ public class TaxRateEffectiveDatePrompt extends KpmeEffectiveDatePromptBase {
     	boolean futureEffectiveDateExists = false;
     	
         TaxRate department = (TaxRate) pbo;
-        TaxRate lastDepartment = HrServiceLocator.getTaxRateService().getTaxRate(department.getDept(), TKUtils.END_OF_TIME);
+        TaxRate lastDepartment = HrServiceLocator.getTaxRateService().getTaxRate(department.getCountry(), TKUtils.END_OF_TIME);
         if (lastDepartment != null && lastDepartment.getEffectiveLocalDate() != null && department.getEffectiveLocalDate() != null) {
         	futureEffectiveDateExists = lastDepartment.getEffectiveLocalDate().isAfter(department.getEffectiveLocalDate());
         }

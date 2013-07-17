@@ -136,14 +136,14 @@
     </class-descriptor>
     
         <!-- Tax Rate -->
-    <!-- Business Keys - [dept : effectiveDate : timestamp] -->
+    <!-- Business Keys - [effectiveDate : timestamp] -->
     <class-descriptor class="org.kuali.kpme.core.taxrate.TaxRate" table="HR_TAX_RATE_T">
-        <field-descriptor name="hrTaxRateId"       	column="HR_TAX_RATE_ID"  	jdbc-type="VARCHAR"    length="60" nullable="false" primarykey="true"  autoincrement="true" sequence-name="HR_DEPT_S" />
-        <field-descriptor name="dept"          		column="DEPT"        		jdbc-type="VARCHAR"    length="21" nullable="false" primarykey="false" />
-        <field-descriptor name="description"    	column="DESCRIPTION" 		jdbc-type="VARCHAR"    length="30" nullable="false" primarykey="false" />
+        <field-descriptor name="hrTaxRateId"       	column="HR_TAX_RATE_ID"  	jdbc-type="VARCHAR"    length="60" nullable="false" primarykey="true"  autoincrement="true" sequence-name="HR_TAX_RATE_S" />
+        <field-descriptor name="country"          	column="COUNTRY"     		jdbc-type="VARCHAR"    length="2"  nullable="false" primarykey="false" />
+        <field-descriptor name="city"		    	column="CITY"		 		jdbc-type="VARCHAR"    length="4"  nullable="false" primarykey="false" />
         <field-descriptor name="org"            	column="ORG"         		jdbc-type="VARCHAR"    length="10" nullable="false" primarykey="false" />
         <field-descriptor name="chart"          	column="CHART"       		jdbc-type="VARCHAR"    length="10" nullable="false" primarykey="false" />
-        <field-descriptor name="location"       	column="LOCATION"    		jdbc-type="VARCHAR"    length="20" nullable="fales" primarykey="false" />
+        <field-descriptor name="state"       		column="STATE"    			jdbc-type="VARCHAR"    length="2" nullable="fales" primarykey="false" />
         <field-descriptor name="payrollApproval"    column="PYRLL_APPRVL"   	jdbc-type="VARCHAR"    length="1" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbCharBooleanConversion" />
         <field-descriptor name="effectiveDate"  	column="EFFDT"       		jdbc-type="DATE"       nullable="true" primarykey="false" conversion="org.apache.ojb.broker.accesslayer.conversions.JavaDate2SqlTimestampFieldConversion" />
         <field-descriptor name="timestamp"      	column="TIMESTAMP"   		jdbc-type="TIMESTAMP"  nullable="false" primarykey="false" conversion="org.kuali.kpme.core.TimestampConverter" />

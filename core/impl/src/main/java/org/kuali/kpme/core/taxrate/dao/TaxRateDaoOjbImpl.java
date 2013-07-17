@@ -41,7 +41,7 @@ public class TaxRateDaoOjbImpl extends PlatformAwareDaoBaseOjb implements TaxRat
 	public TaxRate getTaxRate(String department, LocalDate asOfDate) {
 		Criteria root = new Criteria();
 
-		root.addEqualTo("dept", department);
+		root.addEqualTo("country", department);
         root.addEqualTo("effectiveDate", OjbSubQueryUtil.getEffectiveDateSubQuery(TaxRate.class, asOfDate, TaxRate.EQUAL_TO_FIELDS, false));
         root.addEqualTo("timestamp", OjbSubQueryUtil.getTimestampSubQuery(TaxRate.class, TaxRate.EQUAL_TO_FIELDS, false));
 
@@ -60,7 +60,7 @@ public class TaxRateDaoOjbImpl extends PlatformAwareDaoBaseOjb implements TaxRat
     public List<TaxRate> getTaxRates(String location, LocalDate asOfDate) {
 		Criteria root = new Criteria();
 
-		root.addEqualTo("location", location);
+		root.addEqualTo("state", location);
         root.addEqualTo("effectiveDate", OjbSubQueryUtil.getEffectiveDateSubQuery(TaxRate.class, asOfDate, TaxRate.EQUAL_TO_FIELDS, false));
         root.addEqualTo("timestamp", OjbSubQueryUtil.getTimestampSubQuery(TaxRate.class, TaxRate.EQUAL_TO_FIELDS, false));
 
@@ -86,15 +86,15 @@ public class TaxRateDaoOjbImpl extends PlatformAwareDaoBaseOjb implements TaxRat
         Criteria root = new Criteria();
 
         if (StringUtils.isNotBlank(dept)) {
-            root.addLike("dept", dept);
+            root.addLike("country", dept);
         }
 
         if (StringUtils.isNotBlank(location)) {
-            root.addLike("location", location);
+            root.addLike("state", location);
         }
 
         if (StringUtils.isNotBlank(departmentDescr)) {
-            root.addLike("description", departmentDescr);
+            root.addLike("city", departmentDescr);
         }
 
         if (StringUtils.isNotBlank(active)) {
@@ -130,7 +130,7 @@ public class TaxRateDaoOjbImpl extends PlatformAwareDaoBaseOjb implements TaxRat
 	@Override
 	public int getTaxRateCount(String department) {
 		Criteria crit = new Criteria();
-		crit.addEqualTo("dept", department);
+		crit.addEqualTo("country", department);
 		Query query = QueryFactory.newQuery(TaxRate.class, crit);
 		return this.getPersistenceBrokerTemplate().getCount(query);
 	}

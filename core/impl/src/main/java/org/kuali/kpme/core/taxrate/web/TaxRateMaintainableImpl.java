@@ -71,12 +71,12 @@ public class TaxRateMaintainableImpl extends HrBusinessObjectMaintainableImpl {
         TaxRate oldMaintainableObject = (TaxRate) document.getOldMaintainableObject().getBusinessObject();
         TaxRate newMaintainableObject = (TaxRate) document.getNewMaintainableObject().getBusinessObject();
         
-        TaxRate oldDepartment = HrServiceLocator.getTaxRateService().getTaxRate(oldMaintainableObject.getDept(), oldMaintainableObject.getEffectiveLocalDate());
+        TaxRate oldDepartment = HrServiceLocator.getTaxRateService().getTaxRate(oldMaintainableObject.getCountry(), oldMaintainableObject.getEffectiveLocalDate());
 
         oldMaintainableObject.setRoleMembers(oldDepartment.getRoleMembers());
         oldMaintainableObject.setInactiveRoleMembers(oldDepartment.getInactiveRoleMembers());
         
-        TaxRate newDepartment = HrServiceLocator.getTaxRateService().getTaxRate(newMaintainableObject.getDept(), newMaintainableObject.getEffectiveLocalDate());
+        TaxRate newDepartment = HrServiceLocator.getTaxRateService().getTaxRate(newMaintainableObject.getCountry(), newMaintainableObject.getEffectiveLocalDate());
 
         newMaintainableObject.setRoleMembers(newDepartment.getRoleMembers());
         newMaintainableObject.setInactiveRoleMembers(newDepartment.getInactiveRoleMembers());

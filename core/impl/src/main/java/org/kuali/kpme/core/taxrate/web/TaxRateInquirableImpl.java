@@ -35,8 +35,8 @@ public class TaxRateInquirableImpl extends KualiInquirableImpl {
 
         if (StringUtils.isNotBlank((String) fieldValues.get("hrDeptId"))) {
             departmentObj = HrServiceLocator.getTaxRateService().getTaxRate((String) fieldValues.get("hrDeptId"));
-        } else if (fieldValues.containsKey("dept") && fieldValues.containsKey("effectiveDate")) {
-            String department = (String) fieldValues.get("dept");
+        } else if (fieldValues.containsKey("country") && fieldValues.containsKey("effectiveDate")) {
+            String department = (String) fieldValues.get("country");
             LocalDate effectiveDate = TKUtils.formatDateString((String) fieldValues.get("effectiveDate"));
             departmentObj = HrServiceLocator.getTaxRateService().getTaxRate(department, effectiveDate);
         } else {

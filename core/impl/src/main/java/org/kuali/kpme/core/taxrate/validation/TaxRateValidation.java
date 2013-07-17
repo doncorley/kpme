@@ -61,13 +61,13 @@ public class TaxRateValidation extends MaintenanceDocumentRuleBase {
 		boolean valid = true;
 
 		if (department.getHrTaxRateId() == null) {
-			if (department.getDept() != null && department.getEffectiveDate() != null) {
-				TaxRate existingDept = HrServiceLocator.getTaxRateService().getTaxRate(department.getDept(), department.getEffectiveLocalDate());
+			if (department.getCountry() != null && department.getEffectiveDate() != null) {
+				TaxRate existingDept = HrServiceLocator.getTaxRateService().getTaxRate(department.getCountry(), department.getEffectiveLocalDate());
 				
 				if (existingDept != null) {
-					if (StringUtils.equalsIgnoreCase(department.getDept(), existingDept.getDept())
-							&& StringUtils.equalsIgnoreCase(department.getLocation(), existingDept.getLocation())) {
-						this.putFieldError("dept", "error.taxrate.duplicate.exists", department.getDept());
+					if (StringUtils.equalsIgnoreCase(department.getCountry(), existingDept.getCountry())
+							&& StringUtils.equalsIgnoreCase(department.getState(), existingDept.getState())) {
+						this.putFieldError("country", "error.taxrate.duplicate.exists", department.getCountry());
 						valid = false;
 					}
 				}

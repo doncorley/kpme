@@ -24,14 +24,14 @@
     <bean id="TaxRate" parent="TaxRate-parentBean" />
     <bean id="TaxRate-parentBean" abstract="true" parent="BusinessObjectEntry">
         <property name="businessObjectClass" value="org.kuali.kpme.core.taxrate.TaxRate" />
-        <property name="titleAttribute" value="dept" />
+        <property name="titleAttribute" value="country" />
         <property name="objectLabel" value="TaxRate" />
         <property name="attributes">
             <list>
 		      	<ref bean="TaxRate-htTaxRateId" />
-		        <ref bean="TaxRate-dept" />
-		        <ref bean="TaxRate-description" />
-		        <ref bean="TaxRate-location" />
+		        <ref bean="TaxRate-country" />
+		        <ref bean="TaxRate-city" />
+		        <ref bean="TaxRate-state" />
 		        <ref bean="TaxRate-chart" />
 		        <ref bean="TaxRate-org" />
 		        <ref bean="TaxRate-effectiveDate" />
@@ -44,10 +44,10 @@
         <property name="relationships">
             <list>
                 <bean parent="RelationshipDefinition">
-                    <property name="objectAttributeName" value="locationObj" />
+                    <property name="objectAttributeName" value="stateObj" />
                     <property name="primitiveAttributes">
                         <list>
-                            <bean parent="PrimitiveAttributeDefinition" p:sourceName="location" p:targetName="location" />
+                            <bean parent="PrimitiveAttributeDefinition" p:sourceName="state" p:targetName="location" />
                         </list>
                     </property>
                 </bean>
@@ -103,28 +103,28 @@
 		</property>
     </bean>
 
-    <bean id="TaxRate-dept" parent="TaxRate-dept-parentBean" />
-    <bean id="TaxRate-dept-parentBean" abstract="true" parent="AttributeDefinition">
-	    <property name="name" value="dept" />
-        <property name="label" value="TaxRate" />
-        <property name="shortLabel" value="TaxRate" />
+    <bean id="TaxRate-country" parent="TaxRate-country-parentBean" />
+    <bean id="TaxRate-country-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="country" />
+        <property name="label" value="Country" />
+        <property name="shortLabel" value="Country" />
 	    <property name="forceUppercase" value="true" />
-	    <property name="maxLength" value="21" />
+	    <property name="maxLength" value="2" />
 	    <property name="validationPattern">
             <bean parent="AnyCharacterValidationPattern">
                 <property name="allowWhitespace" value="false" />
             </bean>
         </property>
 	    <property name="control">
-            <bean parent="TextControlDefinition" p:size="21" />
+            <bean parent="TextControlDefinition" p:size="2" />
 	    </property>
     </bean>
 
-    <bean id="TaxRate-description" parent="TaxRate-description-parentBean" />
-    <bean id="TaxRate-description-parentBean" abstract="true" parent="AttributeDefinition">
-	    <property name="name" value="description" />
-        <property name="label" value="Description" />
-        <property name="shortLabel" value="Description" />
+    <bean id="TaxRate-city" parent="TaxRate-city-parentBean" />
+    <bean id="TaxRate-city-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="city" />
+        <property name="label" value="City" />
+        <property name="shortLabel" value="City" />
 	    <property name="forceUppercase" value="false" />
 	    <property name="maxLength" value="75" />
 	    <property name="validationPattern">
@@ -137,11 +137,11 @@
 	    </property>
     </bean>
   
-    <bean id="TaxRate-location" parent="TaxRate-location-parentBean" />
-    <bean id="TaxRate-location-parentBean" abstract="true" parent="AttributeDefinition">
-	    <property name="name" value="location" />
-        <property name="label" value="Location" />
-        <property name="shortLabel" value="Location" />
+    <bean id="TaxRate-state" parent="TaxRate-state-parentBean" />
+    <bean id="TaxRate-state-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="state" />
+        <property name="label" value="State" />
+        <property name="shortLabel" value="State" />
 	    <property name="forceUppercase" value="false" />
 	    <property name="maxLength" value="20" />
 	    <property name="control">
@@ -254,9 +254,9 @@
                     <property name="inquiryFields">
                         <list>
 							<bean parent="FieldDefinition" p:attributeName="effectiveDate" />
-							<bean parent="FieldDefinition" p:attributeName="dept" />
-							<bean parent="FieldDefinition" p:attributeName="description" />
-							<bean parent="FieldDefinition" p:attributeName="location" />
+							<bean parent="FieldDefinition" p:attributeName="country" />
+							<bean parent="FieldDefinition" p:attributeName="city" />
+							<bean parent="FieldDefinition" p:attributeName="state" />
 							<bean parent="FieldDefinition" p:attributeName="chart" />
 							<bean parent="FieldDefinition" p:attributeName="org" />
 							<bean parent="FieldDefinition" p:attributeName="payrollApproval" />
@@ -315,9 +315,9 @@
         </property>
         <property name="lookupFields">
             <list>
-		        <bean parent="FieldDefinition" p:attributeName="dept" />
-		        <bean parent="FieldDefinition" p:attributeName="location" />
-		        <bean parent="FieldDefinition" p:attributeName="description" />
+		        <bean parent="FieldDefinition" p:attributeName="country" />
+		        <bean parent="FieldDefinition" p:attributeName="state" />
+		        <bean parent="FieldDefinition" p:attributeName="city" />
 		        <bean parent="FieldDefinition" p:attributeName="history" p:defaultValue="N"/>
 		        <bean parent="FieldDefinition" p:attributeName="payrollApproval" />
 		        <bean parent="FieldDefinition" p:attributeName="active" />
@@ -325,9 +325,9 @@
         </property>
         <property name="resultFields">
             <list>
-		        <bean parent="FieldDefinition" p:attributeName="dept" p:forceInquiry="true" />
-		        <bean parent="FieldDefinition" p:attributeName="location" />
-		        <bean parent="FieldDefinition" p:attributeName="description" />
+		        <bean parent="FieldDefinition" p:attributeName="country" p:forceInquiry="true" />
+		        <bean parent="FieldDefinition" p:attributeName="state" />
+		        <bean parent="FieldDefinition" p:attributeName="city" />
 		        <bean parent="FieldDefinition" p:attributeName="timestamp" />
 		        <bean parent="FieldDefinition" p:attributeName="payrollApproval" />
 		        <bean parent="FieldDefinition" p:attributeName="active" />
@@ -343,9 +343,9 @@
 
     <property name="criteriaFields">
       <list>
-		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="dept" />
-		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="location" />
-		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="description" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="country" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="state" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="city" />
 		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="history" p:defaultValue="N" />
 		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="payrollApproval" />
 		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="active" p:defaultValue="Y" />
@@ -354,9 +354,9 @@
 
     <property name="resultFields">
       <list>
-		<bean parent="Uif-DataField" p:propertyName="dept" />
-		<bean parent="Uif-DataField" p:propertyName="location" />
-		<bean parent="Uif-DataField" p:propertyName="description" />
+		<bean parent="Uif-DataField" p:propertyName="country" />
+		<bean parent="Uif-DataField" p:propertyName="state" />
+		<bean parent="Uif-DataField" p:propertyName="city" />
 		<bean parent="Uif-DataField" p:propertyName="timestamp" />
 		<bean parent="Uif-DataField" p:propertyName="payrollApproval" />
 		<bean parent="Uif-DataField" p:propertyName="active" />

@@ -46,7 +46,7 @@ public class TaxRateLookupableHelper extends KPMELookupableHelper {
 		params.put(KRADConstants.BUSINESS_OBJECT_CLASS_ATTRIBUTE, getBusinessObjectClass().getName());
 		params.put(KRADConstants.DISPATCH_REQUEST_PARAMETER, KRADConstants.MAINTENANCE_NEW_METHOD_TO_CALL);
 		params.put("hrDeptId", hrDeptId);
-        params.put("dept", departmentObj.getDept());
+        params.put("country", departmentObj.getCountry());
 		AnchorHtmlData viewUrl = new AnchorHtmlData(UrlFactory.parameterizeUrl(KRADConstants.INQUIRY_ACTION, params), "view");
 		viewUrl.setDisplayText("view");
 		viewUrl.setTarget(AnchorHtmlData.TARGET_BLANK);
@@ -57,9 +57,9 @@ public class TaxRateLookupableHelper extends KPMELookupableHelper {
 
     @Override
     public List<? extends BusinessObject> getSearchResults(Map<String, String> fieldValues) {
-        String dept = fieldValues.get("dept");
-        String location = fieldValues.get("location");
-        String descr = fieldValues.get("description");
+        String dept = fieldValues.get("country");
+        String location = fieldValues.get("state");
+        String descr = fieldValues.get("city");
         String active = fieldValues.get("active");
         String showHist = fieldValues.get("history");
 
