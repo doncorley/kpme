@@ -13,28 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kuali.kpme.core.role;
+package org.kuali.kpme.core.role.taxrate;
 
-public enum KPMERoleMemberAttribute {
-	
-	WORK_AREA ("workArea"),
-	DEPARTMENT ("department"),
-	LOCATION ("location"),
-	TAX_RATE ("taxRate"),
-	POSITION ("position");
-	
-	private String roleMemberAttributeName;
-	
-	private KPMERoleMemberAttribute(String roleMemberAttributeName) {
-		this.roleMemberAttributeName = roleMemberAttributeName;
-	}
+import org.kuali.kpme.core.role.KPMERole;
+import org.kuali.rice.krad.valuefinder.ValueFinder;
 
-	public String getRoleMemberAttributeName() {
-		return roleMemberAttributeName;
-	}
+public class TaxRateDefaultRoleMemberValueFinder implements ValueFinder {
 
-	public void setRoleMemberAttributeName(String roleMemberAttributeName) {
-		this.roleMemberAttributeName = roleMemberAttributeName;
+	@Override
+	public String getValue() {
+		return KPMERole.TIME_DEPARTMENT_ADMINISTRATOR.getRoleName();
 	}
 
 }

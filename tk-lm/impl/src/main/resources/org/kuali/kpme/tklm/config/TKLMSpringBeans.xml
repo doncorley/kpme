@@ -200,6 +200,10 @@
         <property name="serviceName" value="departmentService" />
     </bean>
 
+    <bean id="kpme.core.taxRateService" class="org.kuali.rice.core.framework.resourceloader.GlobalResourceLoaderServiceFactoryBean">
+        <property name="serviceName" value="taxRateService" />
+    </bean>
+
     <bean id="kpme.core.workAreaService" class="org.kuali.rice.core.framework.resourceloader.GlobalResourceLoaderServiceFactoryBean">
         <property name="serviceName" value="workAreaService" />
     </bean>
@@ -249,6 +253,7 @@
     
     <bean id="tkPermissionService" class="org.kuali.kpme.tklm.time.service.permission.TKPermissionServiceImpl">
         <property name="departmentService" ref="kpme.core.departmentService" />
+        <property name="taxRateService" ref="kpme.core.taxRateService" />
         <property name="permissionService" ref="kimPermissionService" />
         <property name="timesheetService" ref="timesheetService" />
         <property name="workAreaService" ref="kpme.core.workAreaService" />
@@ -256,6 +261,7 @@
     
     <bean id="lmPermissionService" class="org.kuali.kpme.tklm.leave.service.permission.LMPermissionServiceImpl">
         <property name="departmentService" ref="kpme.core.departmentService" />
+        <property name="taxRateService" ref="kpme.core.taxRateService" />
         <property name="permissionService" ref="kimPermissionService" />
         <property name="leaveCalendarService" ref="leaveCalendarService" />
         <property name="leaveRequestDocumentService" ref="leaveRequestDocumentService" />

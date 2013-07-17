@@ -40,6 +40,7 @@ import org.joda.time.DateTime;
 import org.kuali.kpme.core.department.Department;
 import org.kuali.kpme.core.department.service.DepartmentService;
 import org.kuali.kpme.core.role.KPMERoleMemberAttribute;
+import org.kuali.kpme.core.taxrate.service.TaxRateService;
 import org.kuali.kpme.core.workarea.WorkArea;
 import org.kuali.kpme.core.workarea.service.WorkAreaService;
 import org.kuali.rice.core.api.criteria.LookupCustomizer;
@@ -66,7 +67,8 @@ public class KPMERoleServiceImpl implements KPMERoleService {
     private static final Logger LOG = Logger.getLogger(KPMERoleServiceImpl.class);
     
     private DepartmentService departmentService;
-    private GroupService groupService;
+    private TaxRateService taxRateService;
+	private GroupService groupService;
 	private KimTypeInfoService kimTypeInfoService;
 	private RoleService roleService;
 	private WorkAreaService workAreaService;
@@ -412,6 +414,14 @@ public class KPMERoleServiceImpl implements KPMERoleService {
     public void setDepartmentService(DepartmentService departmentService) {
     	this.departmentService = departmentService;
     }
+
+    public TaxRateService getTaxRateService() {
+		return taxRateService;
+	}
+
+	public void setTaxRateService(TaxRateService taxRateService) {
+		this.taxRateService = taxRateService;
+	}
 
 	public GroupService getGroupService() {
 		return groupService;

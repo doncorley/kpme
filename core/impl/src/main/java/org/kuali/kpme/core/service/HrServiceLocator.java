@@ -40,6 +40,7 @@ import org.kuali.kpme.core.service.permission.HRPermissionService;
 import org.kuali.kpme.core.service.role.KPMERoleService;
 import org.kuali.kpme.core.service.timezone.TimezoneService;
 import org.kuali.kpme.core.task.service.TaskService;
+import org.kuali.kpme.core.taxrate.service.TaxRateService;
 import org.kuali.kpme.core.workarea.service.WorkAreaService;
 import org.kuali.rice.core.impl.cache.DistributedCacheManagerDecorator;
 import org.springframework.beans.BeansException;
@@ -72,6 +73,7 @@ public class HrServiceLocator implements ApplicationContextAware {
 	public static final String HR_PAY_TYPE_SERVICE = "payTypeService";
 	public static final String HR_WORK_AREA_SERVICE = "workAreaService";
 	public static final String HR_DEPARTMENT_SERVICE = "departmentService";
+	public static final String HR_TAX_RATE_SERVICE = "taxRateService";
 	public static final String HR_EARN_CODE = "earnCodeService";
 	public static final String HR_EARN_CODE_SECURITY = "earnCodeSecurityService";
 	public static final String HR_TIME_EARN_CODE_GROUP_SERVICE = "earnCodeGroupService";
@@ -117,6 +119,10 @@ public class HrServiceLocator implements ApplicationContextAware {
 
 	public static DepartmentService getDepartmentService() {
 		return (DepartmentService) CONTEXT.getBean(HR_DEPARTMENT_SERVICE);
+	}
+
+	public static TaxRateService getTaxRateService() {
+		return (TaxRateService) CONTEXT.getBean(HR_TAX_RATE_SERVICE);
 	}
 
 	public static WorkAreaService getWorkAreaService() {

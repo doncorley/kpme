@@ -1,0 +1,367 @@
+<!--
+
+    Copyright 2004-2013 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="TaxRate" parent="TaxRate-parentBean" />
+    <bean id="TaxRate-parentBean" abstract="true" parent="BusinessObjectEntry">
+        <property name="businessObjectClass" value="org.kuali.kpme.core.taxrate.TaxRate" />
+        <property name="titleAttribute" value="dept" />
+        <property name="objectLabel" value="TaxRate" />
+        <property name="attributes">
+            <list>
+		      	<ref bean="TaxRate-hrDeptId" />
+		        <ref bean="TaxRate-dept" />
+		        <ref bean="TaxRate-description" />
+		        <ref bean="TaxRate-location" />
+		        <ref bean="TaxRate-chart" />
+		        <ref bean="TaxRate-org" />
+		        <ref bean="TaxRate-effectiveDate" />
+		        <ref bean="TaxRate-payrollApproval" />
+		        <ref bean="TaxRate-active" />
+		        <ref bean="TaxRate-history" />
+		        <ref bean="TaxRate-timestamp" />
+            </list>
+        </property>
+        <property name="relationships">
+            <list>
+                <bean parent="RelationshipDefinition">
+                    <property name="objectAttributeName" value="locationObj" />
+                    <property name="primitiveAttributes">
+                        <list>
+                            <bean parent="PrimitiveAttributeDefinition" p:sourceName="location" p:targetName="location" />
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="RelationshipDefinition">
+                    <property name="objectAttributeName" value="chartObj" />
+					<property name="primitiveAttributes">
+						<list>
+							<bean parent="PrimitiveAttributeDefinition" p:sourceName="chart" p:targetName="chartOfAccountsCode" />
+						</list>
+					</property>
+				</bean>
+
+				<bean parent="RelationshipDefinition">
+					<property name="objectAttributeName" value="orgObj" />
+					<property name="primitiveAttributes">
+						<list>
+							<bean parent="PrimitiveAttributeDefinition" p:sourceName="org" p:targetName="organizationCode" />
+							<bean parent="PrimitiveAttributeDefinition" p:sourceName="chart" p:targetName="chartOfAccountsCode" />
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+        <property name="collections">
+            <list>
+		        <bean parent="CollectionDefinition" p:name="roleMembers" p:label="Role Members" p:shortLabel="Role Members" p:summary="Role Members" p:description="Role Members" />
+		        <bean parent="CollectionDefinition" p:name="inactiveRoleMembers" p:label="Inactive Role Members" p:shortLabel="Inactive Role Members" p:summary="Inactive Role Members" p:description="Inactive Role Members" />
+            </list>
+        </property>
+        <property name="inquiryDefinition">
+            <ref bean="TaxRate-inquiryDefinition" />
+        </property>
+        <property name="lookupDefinition">
+            <ref bean="TaxRate-lookupDefinition" />
+        </property>
+    </bean>
+
+    <!-- Attribute Definitions -->
+
+    <bean id="TaxRate-hrDeptId" parent="TaxRate-hrDeptId-parentBean" />
+    <bean id="TaxRate-hrDeptId-parentBean" abstract="true" parent="AttributeDefinition">
+   		<property name="name" value="hrDeptId" />
+        <property name="label" value="TaxRate Id" />
+   		<property name="shortLabel" value="TaxRate Id" />
+		<property name="maxLength" value="60" />
+		<property name="validationPattern">
+			<bean parent="AnyCharacterValidationPattern">
+				<property name="allowWhitespace" value="false" />
+			</bean>
+		</property>
+		<property name="control">
+			<bean parent="TextControlDefinition" p:size="60" />
+		</property>
+    </bean>
+
+    <bean id="TaxRate-dept" parent="TaxRate-dept-parentBean" />
+    <bean id="TaxRate-dept-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="dept" />
+        <property name="label" value="TaxRate" />
+        <property name="shortLabel" value="TaxRate" />
+	    <property name="forceUppercase" value="true" />
+	    <property name="maxLength" value="21" />
+	    <property name="validationPattern">
+            <bean parent="AnyCharacterValidationPattern">
+                <property name="allowWhitespace" value="false" />
+            </bean>
+        </property>
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="21" />
+	    </property>
+    </bean>
+
+    <bean id="TaxRate-description" parent="TaxRate-description-parentBean" />
+    <bean id="TaxRate-description-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="description" />
+        <property name="label" value="Description" />
+        <property name="shortLabel" value="Description" />
+	    <property name="forceUppercase" value="false" />
+	    <property name="maxLength" value="75" />
+	    <property name="validationPattern">
+            <bean parent="AnyCharacterValidationPattern">
+                <property name="allowWhitespace" value="true" />
+            </bean>
+        </property>
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="30" />
+	    </property>
+    </bean>
+  
+    <bean id="TaxRate-location" parent="TaxRate-location-parentBean" />
+    <bean id="TaxRate-location-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="location" />
+        <property name="label" value="Location" />
+        <property name="shortLabel" value="Location" />
+	    <property name="forceUppercase" value="false" />
+	    <property name="maxLength" value="20" />
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="20" />
+	    </property>
+        <property name="validationPattern">
+            <bean parent="AnyCharacterValidationPattern">
+                <property name="allowWhitespace" value="false" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="TaxRate-chart" parent="TaxRate-chart-parentBean" />
+    <bean id="TaxRate-chart-parentBean" abstract="true" parent="AttributeDefinition">
+        <property name="name" value="chart" />
+        <property name="label" value="Chart" />
+        <property name="shortLabel" value="Chart" />
+        <property name="forceUppercase" value="true" />
+        <property name="maxLength" value="10" />
+        <property name="control">
+            <bean parent="TextControlDefinition" p:size="10" />
+        </property>
+        <property name="validationPattern">
+            <bean parent="AnyCharacterValidationPattern">
+                <property name="allowWhitespace" value="false" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="TaxRate-org" parent="TaxRate-org-parentBean" />
+    <bean id="TaxRate-org-parentBean" abstract="true" parent="AttributeDefinition">
+	 	<property name="name" value="org" />
+        <property name="label" value="Organization" />
+        <property name="shortLabel" value="Organization" />
+	 	<property name="forceUppercase" value="true" />
+	    <property name="maxLength" value="10" />
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="10" />
+	    </property>
+        <property name="validationPattern">
+            <bean parent="AnyCharacterValidationPattern">
+                <property name="allowWhitespace" value="false" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="TaxRate-effectiveDate" parent="TaxRate-effectiveDate-parentBean" />
+    <bean id="TaxRate-effectiveDate-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="effectiveDate" />
+        <property name="label" value="Effective Date" />
+	    <property name="shortLabel" value="Effective Date" />
+	    <property name="maxLength" value="10" />
+	    <property name="validationPattern">
+	       <bean parent="DateValidationPattern" />
+	    </property>
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="10" p:datePicker="true" />
+	    </property>
+	    <property name="formatterClass" value="org.kuali.rice.core.web.format.DateFormatter" />
+    </bean>
+    
+    <bean id="TaxRate-payrollApproval" parent="TaxRate-payrollApproval-parentBean" />
+	<bean id="TaxRate-payrollApproval-parentBean" abstract="true" parent="AttributeDefinition">
+		<property name="shortLabel" value="Payroll Approval" />
+		<property name="control">
+			<bean parent="CheckboxControlDefinition" />
+		</property>
+		<property name="name" value="payrollApproval" />
+		<property name="label" value="Payroll Approval" />
+	</bean>
+
+    <bean id="TaxRate-active" parent="TaxRate-active-parentBean" />
+    <bean id="TaxRate-active-parentBean" abstract="true" parent="AttributeReferenceDummy-activeIndicator">
+        <property name="name" value="active" />
+        <property name="label" value="Active" />
+    </bean>
+    
+    <bean id="TaxRate-history" parent="TaxRate-history-parentBean" />
+    <bean id="TaxRate-history-parentBean" abstract="true" parent="AttributeDefinition">
+        <property name="name" value="history" />
+        <property name="label" value="Show History" />
+        <property name="shortLabel" value="Show History" />
+        <property name="control">
+            <bean parent="RadioControlDefinition" p:valuesFinderClass="org.kuali.kpme.core.web.KpmeHistoryKeyValueFinder" />
+        </property>
+    </bean>
+
+	<bean id="TaxRate-timestamp" parent="TaxRate-timestamp-parentBean" />
+	<bean id="TaxRate-timestamp-parentBean" abstract="true" parent="AttributeDefinition">
+		<property name="name" value="timestamp" />
+        <property name="label" value="Timestamp" />
+		<property name="shortLabel" value="Timestamp" />
+		<property name="maxLength" value="15" />
+		<property name="control">
+			<bean parent="LookupReadonlyControlDefinition" p:size="15" />
+		</property>
+		<property name="formatterClass" value="org.kuali.rice.core.web.format.TimestampAMPMFormatter" />
+	</bean>
+
+    <!-- Business Object Inquiry Definition -->
+
+    <bean id="TaxRate-inquiryDefinition" parent="TaxRate-inquiryDefinition-parentBean" />
+    <bean id="TaxRate-inquiryDefinition-parentBean" abstract="true" parent="InquiryDefinition" p:inquirableClass="org.kuali.kpme.core.taxrate.web.TaxRateInquirableImpl">
+        <property name="title" value="TaxRate Inquiry" />
+        <property name="translateCodes" value="false" />
+        <property name="inquirySections">
+            <list>
+                <bean parent="InquirySectionDefinition" p:title="TaxRate">
+                    <property name="numberOfColumns" value="1" />
+                    <property name="inquiryFields">
+                        <list>
+							<bean parent="FieldDefinition" p:attributeName="effectiveDate" />
+							<bean parent="FieldDefinition" p:attributeName="dept" />
+							<bean parent="FieldDefinition" p:attributeName="description" />
+							<bean parent="FieldDefinition" p:attributeName="location" />
+							<bean parent="FieldDefinition" p:attributeName="chart" />
+							<bean parent="FieldDefinition" p:attributeName="org" />
+							<bean parent="FieldDefinition" p:attributeName="payrollApproval" />
+							<bean parent="FieldDefinition" p:attributeName="active" />
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="InquirySectionDefinition" p:title="Role Members">
+                    <property name="inquiryFields">
+                        <list>
+                            <bean parent="InquiryCollectionDefinition" p:attributeName="roleMembers" p:businessObjectClass="org.kuali.kpme.core.role.taxrate.TaxRatePrincipalRoleMemberBo">
+                                <property name="inquiryFields">
+                                    <list>
+										<bean parent="FieldDefinition" p:attributeName="effectiveDate" p:noInquiry="true" />
+                                        <bean parent="FieldDefinition" p:attributeName="principalId" />
+                                        <bean parent="FieldDefinition" p:attributeName="principalName" />
+                                        <bean parent="FieldDefinition" p:attributeName="roleName" />
+                                        <bean parent="FieldDefinition" p:attributeName="expirationDate" p:noInquiry="true" />
+                                        <bean parent="FieldDefinition" p:attributeName="active" />
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="InquirySectionDefinition" p:title="Inactive Role Members">
+                    <property name="inquiryFields">
+                        <list>
+                            <bean parent="InquiryCollectionDefinition" p:attributeName="inactiveRoleMembers" p:businessObjectClass="org.kuali.kpme.core.role.taxrate.TaxRatePrincipalRoleMemberBo">
+                                <property name="inquiryFields">
+                                    <list>
+										<bean parent="FieldDefinition" p:attributeName="effectiveDate" p:noInquiry="true" />
+                                        <bean parent="FieldDefinition" p:attributeName="principalId" />
+                                        <bean parent="FieldDefinition" p:attributeName="principalName" />
+                                        <bean parent="FieldDefinition" p:attributeName="roleName" />
+                                        <bean parent="FieldDefinition" p:attributeName="expirationDate" p:noInquiry="true" />
+                                        <bean parent="FieldDefinition" p:attributeName="active" />
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Business Object Lookup Definition -->
+
+    <bean id="TaxRate-lookupDefinition" parent="TaxRate-lookupDefinition-parentBean" />
+    <bean id="TaxRate-lookupDefinition-parentBean" abstract="true" parent="LookupDefinition">
+        <property name="title" value="TaxRate Lookup" />
+        <property name="lookupableID" value="taxRateLookupable" />
+        <property name="defaultSort">
+            <bean parent="SortDefinition" />
+        </property>
+        <property name="lookupFields">
+            <list>
+		        <bean parent="FieldDefinition" p:attributeName="dept" />
+		        <bean parent="FieldDefinition" p:attributeName="location" />
+		        <bean parent="FieldDefinition" p:attributeName="description" />
+		        <bean parent="FieldDefinition" p:attributeName="history" p:defaultValue="N"/>
+		        <bean parent="FieldDefinition" p:attributeName="payrollApproval" />
+		        <bean parent="FieldDefinition" p:attributeName="active" />
+            </list>
+        </property>
+        <property name="resultFields">
+            <list>
+		        <bean parent="FieldDefinition" p:attributeName="dept" p:forceInquiry="true" />
+		        <bean parent="FieldDefinition" p:attributeName="location" />
+		        <bean parent="FieldDefinition" p:attributeName="description" />
+		        <bean parent="FieldDefinition" p:attributeName="timestamp" />
+		        <bean parent="FieldDefinition" p:attributeName="payrollApproval" />
+		        <bean parent="FieldDefinition" p:attributeName="active" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- KRAD Lookup View Definition -->
+ 
+  <bean id="TaxRate-LookupView" parent="Uif-LookupView">
+    <property name="headerText" value="TaxRate Lookup" />
+    <property name="dataObjectClassName" value="org.kuali.kpme.time.taxrate.TaxRate" />
+
+    <property name="criteriaFields">
+      <list>
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="dept" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="location" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="description" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="history" p:defaultValue="N" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="payrollApproval" />
+		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="active" p:defaultValue="Y" />
+      </list>
+    </property>
+
+    <property name="resultFields">
+      <list>
+		<bean parent="Uif-DataField" p:propertyName="dept" />
+		<bean parent="Uif-DataField" p:propertyName="location" />
+		<bean parent="Uif-DataField" p:propertyName="description" />
+		<bean parent="Uif-DataField" p:propertyName="timestamp" />
+		<bean parent="Uif-DataField" p:propertyName="payrollApproval" />
+		<bean parent="Uif-DataField" p:propertyName="active" />
+      </list>
+    </property>
+  </bean>
+    
+</beans>

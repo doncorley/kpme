@@ -167,6 +167,8 @@
 
     <bean id="departmentDao" class="org.kuali.kpme.core.department.dao.DepartmentDaoOjbImpl" parent="platformAwareDao" />
 
+    <bean id="taxRateDao" class="org.kuali.kpme.core.taxrate.dao.TaxRateDaoOjbImpl" parent="platformAwareDao" />
+
     <bean id="earnCodeSecurityDao" class="org.kuali.kpme.core.earncode.security.dao.EarnCodeSecurityDaoOjbImpl" parent="platformAwareDao" />
 
     <bean id="earnCodeDao" class="org.kuali.kpme.core.earncode.dao.EarnCodeDaoOjbImpl" parent="platformAwareDao" />
@@ -247,6 +249,10 @@
         <property name="departmentDao" ref="departmentDao"/>
     </bean>
 
+    <bean id="taxRateService" class="org.kuali.kpme.core.taxrate.service.TaxRateServiceImpl">
+        <property name="taxRateDao" ref="taxRateDao"/>
+    </bean>
+
     <bean id="earnCodeService" class="org.kuali.kpme.core.earncode.service.EarnCodeServiceImpl">
         <property name="earnCodeDao" ref="earnCodeDao"/>
     </bean>
@@ -300,10 +306,12 @@
         <property name="permissionService" ref="kimPermissionService" />
         <property name="workAreaService" ref="workAreaService" />
         <property name="departmentService" ref="departmentService" />
+        <property name="taxRateService" ref="taxRateService" />
     </bean>
     
     <bean id="kpmeRoleService" class="org.kuali.kpme.core.service.role.KPMERoleServiceImpl">
         <property name="departmentService" ref="departmentService" />
+        <property name="taxRateService" ref="taxRateService" />
         <property name="groupService" ref="kimGroupService" />
         <property name="kimTypeInfoService" ref="kimTypeInfoService" />
         <property name="roleService" ref="kimRoleService" />
@@ -386,6 +394,11 @@
     <bean id="departmentLookupable" class="org.kuali.rice.kns.lookup.KualiLookupableImpl" scope="singleton">
         <property name="lookupableHelperService">
             <bean class="org.kuali.kpme.core.department.web.DepartmentLookupableHelper"/>
+        </property>
+    </bean>
+    <bean id="taxRateLookupable" class="org.kuali.rice.kns.lookup.KualiLookupableImpl" scope="singleton">
+        <property name="lookupableHelperService">
+            <bean class="org.kuali.kpme.core.taxrate.web.TaxRateLookupableHelper"/>
         </property>
     </bean>
     <bean id="workAreaLookupable" class="org.kuali.rice.kns.lookup.KualiLookupableImpl" scope="singleton">

@@ -71,6 +71,18 @@ public interface HRPermissionService {
 	boolean isAuthorizedInDepartment(String principalId, String permissionName, String department, DateTime asOfDate);
 
 	/**
+	 * Checks whether the given {@code principalId} is authorized to perform {@code permissionName} for the given department.
+	 * 
+	 * @param principalId The person to check the permission for
+	 * @param permissionName The name of the permission
+	 * @param department The department qualifier
+	 * @param asOfDate The effective date of the permission
+	 * 
+	 * @return true if {@code principalId} is authorized to perform {@code permissionName} for the given department, false otherwise.
+	 */
+	boolean isAuthorizedInTaxRate(String principalId, String permissionName, String department, DateTime asOfDate);
+
+	/**
 	 * Checks whether the given {@code principalId} is authorized to perform {@code permissionName} for the given location.
 	 * 
 	 * @param principalId The person to check the permission for
@@ -132,6 +144,18 @@ public interface HRPermissionService {
 	 * @return true if {@code principalId} is authorized to perform {@code permissionName} for the given department, false otherwise.
 	 */
 	boolean isAuthorizedByTemplateInDepartment(String principalId, String namespaceCode, String permissionTemplateName, String department, DateTime asOfDate);
+
+	/**
+	 * Checks whether the given {@code principalId} is authorized to perform {@code permissionName} for the given department.
+	 * 
+	 * @param principalId The person to check the permission for
+	 * @param permissionName The name of the permission
+	 * @param department The department qualifier
+	 * @param asOfDate The effective date of the permission
+	 * 
+	 * @return true if {@code principalId} is authorized to perform {@code permissionName} for the given department, false otherwise.
+	 */
+	boolean isAuthorizedByTemplateInTaxRate(String principalId, String namespaceCode, String permissionTemplateName, String department, DateTime asOfDate);
 
 	/**
 	 * Checks whether the given {@code principalId} is authorized to perform {@code permissionName} for the given location.

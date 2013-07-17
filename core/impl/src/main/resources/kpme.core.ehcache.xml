@@ -31,6 +31,7 @@
     <cache name="http://kpme.kuali.org/core/CalendarEntry" maxEntriesLocalHeap="10000" timeToLiveSeconds="900"/>
 
     <cache name="http://kpme.kuali.org/core/Department" maxEntriesLocalHeap="10000" timeToLiveSeconds="900" copyOnRead="true" copyOnWrite="true"/>
+    <cache name="http://kpme.kuali.org/core/TaxRate" maxEntriesLocalHeap="10000" timeToLiveSeconds="900" copyOnRead="true" copyOnWrite="true"/>
     <cache name="http://kpme.kuali.org/core/EarnCodeSecurity" maxEntriesLocalHeap="10000" timeToLiveSeconds="900"/>
     <cache name="http://kpme.kuali.org/core/EarnCode" maxEntriesLocalHeap="10000" timeToLiveSeconds="900"/>
     <cache name="http://kpme.kuali.org/core/Job" maxEntriesLocalHeap="10000" timeToLiveSeconds="900"/>

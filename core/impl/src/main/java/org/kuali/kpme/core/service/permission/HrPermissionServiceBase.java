@@ -24,6 +24,7 @@ import org.kuali.kpme.core.assignment.Assignment;
 import org.kuali.kpme.core.department.Department;
 import org.kuali.kpme.core.department.service.DepartmentService;
 import org.kuali.kpme.core.role.KPMERoleMemberAttribute;
+import org.kuali.kpme.core.taxrate.service.TaxRateService;
 import org.kuali.kpme.core.workarea.WorkArea;
 import org.kuali.kpme.core.workarea.service.WorkAreaService;
 import org.kuali.rice.kew.api.document.DocumentStatus;
@@ -32,6 +33,7 @@ import org.kuali.rice.kim.api.KimConstants;
 public abstract class HrPermissionServiceBase {
 	
 	private DepartmentService departmentService;
+	private TaxRateService taxRateService;
 	private WorkAreaService workAreaService;
 	
 	/**
@@ -95,6 +97,23 @@ public abstract class HrPermissionServiceBase {
     }
     
 	/**
+	 * Checks whether the given {@code principalId} is authorized to perform {@code permissionName} for the given department.
+	 * 
+	 * @param principalId The person to check the permission for
+	 * @param permissionName The name of the permission
+	 * @param department The department qualifier
+	 * @param asOfDate The effective date of the permission
+	 * 
+	 * @return true if {@code principalId} is authorized to perform {@code permissionName} for the given department, false otherwise.
+	 */
+    public boolean isAuthorizedInTaxRate(String principalId, String permissionName, String department, DateTime asOfDate) {
+    	Map<String, String> qualification = new HashMap<String, String>();
+		qualification.put(KPMERoleMemberAttribute.TAX_RATE.getRoleMemberAttributeName(), department);
+    	
+		return isAuthorized(principalId, permissionName, qualification, asOfDate);
+    }
+    
+	/**
 	 * Checks whether the given {@code principalId} is authorized to perform {@code permissionName} for the given location.
 	 * 
 	 * @param principalId The person to check the permission for
@@ -147,6 +166,26 @@ public abstract class HrPermissionServiceBase {
 		
 		Map<String, String> qualification = new HashMap<String, String>();
 		qualification.put(KPMERoleMemberAttribute.DEPARTMENT.getRoleMemberAttributeName(), department);
+		
+		return isAuthorizedByTemplate(principalId, namespaceCode, permissionTemplateName, permissionDetails, qualification, asOfDate);
+	}
+
+	/**
+	 * Checks whether the given {@code principalId} is authorized to perform any permission templated by {@code permissionTemplateName} for the given department.
+	 * 
+	 * @param principalId The person to check the permission for
+	 * @param namespaceCode The namespace for the permission template
+	 * @param permissionTemplateName The name of the permission template
+	 * @param department The department qualifier
+	 * @param asOfDate The effective date of the permission
+	 * 
+	 * @return true if {@code principalId} is authorized to perform any permission templated by {@code permissionTemplateName} for the given department, false otherwise.
+	 */
+	public boolean isAuthorizedByTemplateInTaxRate(String principalId, String namespaceCode, String permissionTemplateName, String department, DateTime asOfDate) {
+		Map<String, String> permissionDetails = new HashMap<String, String>();
+		
+		Map<String, String> qualification = new HashMap<String, String>();
+		qualification.put(KPMERoleMemberAttribute.TAX_RATE.getRoleMemberAttributeName(), department);
 		
 		return isAuthorizedByTemplate(principalId, namespaceCode, permissionTemplateName, permissionDetails, qualification, asOfDate);
 	}
@@ -292,6 +331,27 @@ public abstract class HrPermissionServiceBase {
     }
     
 	/**
+	 * Checks whether the given {@code principalId} is authorized to perform any permission templated by {@code permissionTemplateName} for the given department and document information.
+	 * 
+	 * @param principalId The person to check the permission for
+	 * @param namespaceCode The namespace for the permission template
+	 * @param permissionTemplateName The name of the permission template
+	 * @param department The department qualifier
+	 * @param documentTypeName The type of the document
+	 * @param documentId The id of the document
+	 * @param documentStatus The status of the document
+	 * @param asOfDate The effective date of the permission
+	 * 
+	 * @return true if {@code principalId} is authorized to perform any permission templated by {@code permissionTemplateName} for the given department and document information, false otherwise.
+	 */
+    protected boolean isAuthorizedByTemplateInTaxRate(String principalId, String namespaceCode, String permissionTemplateName, String department, String documentTypeName, String documentId, DocumentStatus documentStatus, DateTime asOfDate) {
+    	Map<String, String> qualification = new HashMap<String, String>();
+		qualification.put(KPMERoleMemberAttribute.TAX_RATE.getRoleMemberAttributeName(), department);
+    	
+    	return isAuthorizedByTemplate(principalId, namespaceCode, permissionTemplateName, documentTypeName, documentId, documentStatus, qualification, asOfDate);
+    }
+    
+	/**
 	 * Checks whether the given {@code principalId} is authorized to perform any permission templated by {@code permissionTemplateName} for the given location and document information.
 	 * 
 	 * @param principalId The person to check the permission for
@@ -344,6 +404,14 @@ public abstract class HrPermissionServiceBase {
     	this.departmentService = departmentService;
     }
     
+    public TaxRateService getTaxRateService() {
+		return taxRateService;
+	}
+
+	public void setTaxRateService(TaxRateService taxRateService) {
+		this.taxRateService = taxRateService;
+	}
+
     public WorkAreaService getWorkAreaService() {
     	return workAreaService;
     }
@@ -351,5 +419,6 @@ public abstract class HrPermissionServiceBase {
     public void setWorkAreaService(WorkAreaService workAreaService) {
     	this.workAreaService = workAreaService;
     }
+
 
 }
