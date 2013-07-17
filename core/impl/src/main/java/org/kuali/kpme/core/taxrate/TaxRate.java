@@ -40,7 +40,7 @@ public class TaxRate extends HrBusinessObject {
             .add("location")
             .build();
 
-    private String hrDeptId;
+    private String hrTaxRateId;
     private String dept;
     private String description;
     private String location;
@@ -66,20 +66,20 @@ public class TaxRate extends HrBusinessObject {
     
 	@Override
 	public String getId() {
-		return getHrDeptId();
+		return getHrTaxRateId();
 	}
 
 	@Override
 	public void setId(String id) {
-		setHrDeptId(id);
+		setHrTaxRateId(id);
 	}
 	
-	public String getHrDeptId() {
-		return hrDeptId;
+	public String getHrTaxRateId() {
+		return hrTaxRateId;
 	}
 
-	public void setHrDeptId(String hrDeptId) {
-		this.hrDeptId = hrDeptId;
+	public void setHrTaxRateId(String hrDeptId) {
+		this.hrTaxRateId = hrDeptId;
 	}
 
 	public String getDept() {

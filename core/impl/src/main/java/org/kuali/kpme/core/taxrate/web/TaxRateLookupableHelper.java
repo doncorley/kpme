@@ -40,7 +40,7 @@ public class TaxRateLookupableHelper extends KPMELookupableHelper {
 		List<HtmlData> customActionUrls = super.getCustomActionUrls(businessObject, pkNames);
 		
 		TaxRate departmentObj = (TaxRate) businessObject;
-		String hrDeptId = departmentObj.getHrDeptId();
+		String hrDeptId = departmentObj.getHrTaxRateId();
 
 		Properties params = new Properties();
 		params.put(KRADConstants.BUSINESS_OBJECT_CLASS_ATTRIBUTE, getBusinessObjectClass().getName());

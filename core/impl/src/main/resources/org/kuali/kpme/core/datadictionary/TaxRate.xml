@@ -28,7 +28,7 @@
         <property name="objectLabel" value="TaxRate" />
         <property name="attributes">
             <list>
-		      	<ref bean="TaxRate-hrDeptId" />
+		      	<ref bean="TaxRate-htTaxRateId" />
 		        <ref bean="TaxRate-dept" />
 		        <ref bean="TaxRate-description" />
 		        <ref bean="TaxRate-location" />
@@ -87,9 +87,9 @@
 
     <!-- Attribute Definitions -->
 
-    <bean id="TaxRate-hrDeptId" parent="TaxRate-hrDeptId-parentBean" />
-    <bean id="TaxRate-hrDeptId-parentBean" abstract="true" parent="AttributeDefinition">
-   		<property name="name" value="hrDeptId" />
+    <bean id="TaxRate-htTaxRateId" parent="TaxRate-htTaxRateId-parentBean" />
+    <bean id="TaxRate-htTaxRateId-parentBean" abstract="true" parent="AttributeDefinition">
+   		<property name="name" value="hrTaxRateId" />
         <property name="label" value="TaxRate Id" />
    		<property name="shortLabel" value="TaxRate Id" />
 		<property name="maxLength" value="60" />

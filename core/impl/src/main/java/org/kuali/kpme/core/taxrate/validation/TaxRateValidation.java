@@ -60,7 +60,7 @@ public class TaxRateValidation extends MaintenanceDocumentRuleBase {
 	protected boolean validateTaxRate(TaxRate department) {
 		boolean valid = true;
 
-		if (department.getHrDeptId() == null) {
+		if (department.getHrTaxRateId() == null) {
 			if (department.getDept() != null && department.getEffectiveDate() != null) {
 				TaxRate existingDept = HrServiceLocator.getTaxRateService().getTaxRate(department.getDept(), department.getEffectiveLocalDate());
 				
