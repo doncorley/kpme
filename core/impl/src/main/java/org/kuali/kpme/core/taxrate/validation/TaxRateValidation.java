@@ -20,12 +20,10 @@ import java.util.ListIterator;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.LocalDate;
-import org.kuali.kpme.core.taxrate.TaxRate;
-import org.kuali.kpme.core.kfs.coa.businessobject.Chart;
-import org.kuali.kpme.core.kfs.coa.businessobject.Organization;
 import org.kuali.kpme.core.role.KPMERole;
 import org.kuali.kpme.core.role.taxrate.TaxRatePrincipalRoleMemberBo;
 import org.kuali.kpme.core.service.HrServiceLocator;
+import org.kuali.kpme.core.taxrate.TaxRate;
 import org.kuali.kpme.core.util.TKUtils;
 import org.kuali.rice.kim.api.role.Role;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
@@ -33,7 +31,6 @@ import org.kuali.rice.kim.impl.role.RoleMemberBo;
 import org.kuali.rice.kns.document.MaintenanceDocument;
 import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
-import org.kuali.rice.krad.service.KRADServiceLocator;
 
 @SuppressWarnings("deprecation")
 public class TaxRateValidation extends MaintenanceDocumentRuleBase {
@@ -48,9 +45,6 @@ public class TaxRateValidation extends MaintenanceDocumentRuleBase {
 			TaxRate department = (TaxRate) pbo;
 			
 			valid &= validateTaxRate(department);
-			valid &= validateChart(department.getChart());
-			valid &= validateOrg(department.getOrg());
-			valid &= validateChartAndOrg(department.getChart(), department.getOrg());
 			valid &= validateRolePresent(department.getRoleMembers(), department.getEffectiveLocalDate());
 		}
 
@@ -73,55 +67,6 @@ public class TaxRateValidation extends MaintenanceDocumentRuleBase {
 				}
 			}
 		} 
-		
-		return valid;
-	}
-
-	protected boolean validateChart(String chart) {
-		boolean valid = true;
-		
-		if (chart != null) {
-			Chart chartObj = KRADServiceLocator.getBusinessObjectService().findBySinglePrimaryKey(Chart.class, chart);
-
-			if (chartObj == null) {
-				this.putFieldError("chart", "dept.chart.notfound", chart);
-				valid = false;
-			}
-		}
-		
-		return valid;
-	}
-
-	protected boolean validateOrg(String organization) {
-		boolean valid = true;
-		
-		if (organization != null) {
-			Organization organizationObj = KRADServiceLocator.getBusinessObjectService().findBySinglePrimaryKey(Organization.class, organization);
-
-			if (organizationObj == null) {
-				this.putFieldError("org", "dept.org.notfound", organization);
-				valid = false;
-			}
-		}
-		
-		return valid;
-	}
-
-	boolean validateChartAndOrg(String chart, String organization) {
-		boolean valid = true;
-		
-		if (chart != null && organization != null) {
-			Chart chartObj = KRADServiceLocator.getBusinessObjectService().findBySinglePrimaryKey(Chart.class, chart);
-			Organization organizationObj = KRADServiceLocator.getBusinessObjectService().findBySinglePrimaryKey(Organization.class, organization);
-			if (chartObj != null && organizationObj != null) {
-				Chart organizationChart = organizationObj.getChartOfAccounts();
-				if (!StringUtils.equals(chartObj.getChartOfAccountsCode(), organizationChart.getChartOfAccountsCode())) {
-					String[] params = new String[] {organization, chart};
-					this.putFieldError("org", "dept.org.chart.notmatch", params);
-					valid = false;
-				}
-			}
-		}
 		
 		return valid;
 	}

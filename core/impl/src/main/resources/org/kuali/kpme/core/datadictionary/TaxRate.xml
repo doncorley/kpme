@@ -30,15 +30,17 @@
             <list>
 		      	<ref bean="TaxRate-htTaxRateId" />
 		        <ref bean="TaxRate-country" />
-		        <ref bean="TaxRate-city" />
 		        <ref bean="TaxRate-state" />
-		        <ref bean="TaxRate-chart" />
-		        <ref bean="TaxRate-org" />
+		        <ref bean="TaxRate-city" />
+		        <ref bean="TaxRate-maritalStatus" />
+		        <ref bean="TaxRate-startDate" />
+		        <ref bean="TaxRate-endDate" />
+		        <ref bean="TaxRate-cutoffAmount" />
+		        <ref bean="TaxRate-taxRate" />
 		        <ref bean="TaxRate-effectiveDate" />
-		        <ref bean="TaxRate-payrollApproval" />
 		        <ref bean="TaxRate-active" />
-		        <ref bean="TaxRate-history" />
 		        <ref bean="TaxRate-timestamp" />
+		        <ref bean="TaxRate-history" />
             </list>
         </property>
         <property name="relationships">
@@ -51,24 +53,6 @@
                         </list>
                     </property>
                 </bean>
-                <bean parent="RelationshipDefinition">
-                    <property name="objectAttributeName" value="chartObj" />
-					<property name="primitiveAttributes">
-						<list>
-							<bean parent="PrimitiveAttributeDefinition" p:sourceName="chart" p:targetName="chartOfAccountsCode" />
-						</list>
-					</property>
-				</bean>
-
-				<bean parent="RelationshipDefinition">
-					<property name="objectAttributeName" value="orgObj" />
-					<property name="primitiveAttributes">
-						<list>
-							<bean parent="PrimitiveAttributeDefinition" p:sourceName="org" p:targetName="organizationCode" />
-							<bean parent="PrimitiveAttributeDefinition" p:sourceName="chart" p:targetName="chartOfAccountsCode" />
-						</list>
-					</property>
-				</bean>
 			</list>
 		</property>
         <property name="collections">
@@ -154,40 +138,6 @@
         </property>
     </bean>
     
-    <bean id="TaxRate-chart" parent="TaxRate-chart-parentBean" />
-    <bean id="TaxRate-chart-parentBean" abstract="true" parent="AttributeDefinition">
-        <property name="name" value="chart" />
-        <property name="label" value="Chart" />
-        <property name="shortLabel" value="Chart" />
-        <property name="forceUppercase" value="true" />
-        <property name="maxLength" value="10" />
-        <property name="control">
-            <bean parent="TextControlDefinition" p:size="10" />
-        </property>
-        <property name="validationPattern">
-            <bean parent="AnyCharacterValidationPattern">
-                <property name="allowWhitespace" value="false" />
-            </bean>
-        </property>
-    </bean>
-
-    <bean id="TaxRate-org" parent="TaxRate-org-parentBean" />
-    <bean id="TaxRate-org-parentBean" abstract="true" parent="AttributeDefinition">
-	 	<property name="name" value="org" />
-        <property name="label" value="Organization" />
-        <property name="shortLabel" value="Organization" />
-	 	<property name="forceUppercase" value="true" />
-	    <property name="maxLength" value="10" />
-	    <property name="control">
-            <bean parent="TextControlDefinition" p:size="10" />
-	    </property>
-        <property name="validationPattern">
-            <bean parent="AnyCharacterValidationPattern">
-                <property name="allowWhitespace" value="false" />
-            </bean>
-        </property>
-    </bean>
-    
     <bean id="TaxRate-effectiveDate" parent="TaxRate-effectiveDate-parentBean" />
     <bean id="TaxRate-effectiveDate-parentBean" abstract="true" parent="AttributeDefinition">
 	    <property name="name" value="effectiveDate" />
@@ -202,33 +152,90 @@
 	    </property>
 	    <property name="formatterClass" value="org.kuali.rice.core.web.format.DateFormatter" />
     </bean>
-    
-    <bean id="TaxRate-payrollApproval" parent="TaxRate-payrollApproval-parentBean" />
-	<bean id="TaxRate-payrollApproval-parentBean" abstract="true" parent="AttributeDefinition">
-		<property name="shortLabel" value="Payroll Approval" />
-		<property name="control">
-			<bean parent="CheckboxControlDefinition" />
-		</property>
-		<property name="name" value="payrollApproval" />
-		<property name="label" value="Payroll Approval" />
-	</bean>
 
+    <bean id="TaxRate-maritalStatus" parent="TaxRate-maritalStatus-parentBean" />
+    <bean id="TaxRate-maritalStatus-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="maritalStatus" />
+        <property name="label" value="Marital Status" />
+        <property name="shortLabel" value="Marital Status" />
+	    <property name="forceUppercase" value="false" />
+	    <property name="maxLength" value="20" />
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="20" />
+	    </property>
+        <property name="validationPattern">
+            <bean parent="AnyCharacterValidationPattern">
+                <property name="allowWhitespace" value="false" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="TaxRate-startDate" parent="TaxRate-startDate-parentBean" />
+    <bean id="TaxRate-startDate-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="startDate" />
+        <property name="label" value="Start Date" />
+	    <property name="shortLabel" value="Start Date" />
+	    <property name="maxLength" value="10" />
+	    <property name="validationPattern">
+	       <bean parent="DateValidationPattern" />
+	    </property>
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="10" p:datePicker="true" />
+	    </property>
+	    <property name="formatterClass" value="org.kuali.rice.core.web.format.DateFormatter" />
+    </bean>
+
+    <bean id="TaxRate-endDate" parent="TaxRate-endDate-parentBean" />
+    <bean id="TaxRate-endDate-parentBean" abstract="true" parent="AttributeDefinition">
+	    <property name="name" value="endDate" />
+        <property name="label" value="End Date" />
+	    <property name="shortLabel" value="End Date" />
+	    <property name="maxLength" value="10" />
+	    <property name="validationPattern">
+	       <bean parent="DateValidationPattern" />
+	    </property>
+	    <property name="control">
+            <bean parent="TextControlDefinition" p:size="10" p:datePicker="true" />
+	    </property>
+	    <property name="formatterClass" value="org.kuali.rice.core.web.format.DateFormatter" />
+    </bean>
+
+    <bean id="TaxRate-cutoffAmount" parent="TaxRate-cutoffAmount-parentBean" />
+    <bean id="TaxRate-cutoffAmount-parentBean" abstract="true" parent="AttributeDefinition">
+        <property name="shortLabel" value="Max Rate" />
+        <property name="maxLength" value="11" />
+        <property name="constraintText" value="Maximum of 2 decimal points"/>
+        <property name="validCharactersConstraint">
+            <bean parent="FixedPointPatternConstraint"  p:allowNegative="false" p:precision="8" p:scale="2"  />
+        </property>
+        <property name="controlField">
+            <bean parent="Uif-TextControl" p:size="11" />
+        </property>
+        <property name="name" value="cutoffAmount" />
+        <property name="label" value="Cutoff Amount" />
+    </bean>
+
+    <bean id="TaxRate-taxRate" parent="TaxRate-taxRate-parentBean" />
+    <bean id="TaxRate-taxRate-parentBean" abstract="true" parent="AttributeDefinition">
+        <property name="shortLabel" value="Max Rate" />
+        <property name="maxLength" value="11" />
+        <property name="constraintText" value="Maximum of 2 decimal points"/>
+        <property name="validCharactersConstraint">
+            <bean parent="FixedPointPatternConstraint"  p:allowNegative="false" p:precision="5" p:scale="2"  />
+        </property>
+        <property name="controlField">
+            <bean parent="Uif-TextControl" p:size="8" />
+        </property>
+        <property name="name" value="taxRate" />
+        <property name="label" value="Tax Rate" />
+    </bean>
+    
     <bean id="TaxRate-active" parent="TaxRate-active-parentBean" />
     <bean id="TaxRate-active-parentBean" abstract="true" parent="AttributeReferenceDummy-activeIndicator">
         <property name="name" value="active" />
         <property name="label" value="Active" />
     </bean>
     
-    <bean id="TaxRate-history" parent="TaxRate-history-parentBean" />
-    <bean id="TaxRate-history-parentBean" abstract="true" parent="AttributeDefinition">
-        <property name="name" value="history" />
-        <property name="label" value="Show History" />
-        <property name="shortLabel" value="Show History" />
-        <property name="control">
-            <bean parent="RadioControlDefinition" p:valuesFinderClass="org.kuali.kpme.core.web.KpmeHistoryKeyValueFinder" />
-        </property>
-    </bean>
-
 	<bean id="TaxRate-timestamp" parent="TaxRate-timestamp-parentBean" />
 	<bean id="TaxRate-timestamp-parentBean" abstract="true" parent="AttributeDefinition">
 		<property name="name" value="timestamp" />
@@ -240,6 +247,16 @@
 		</property>
 		<property name="formatterClass" value="org.kuali.rice.core.web.format.TimestampAMPMFormatter" />
 	</bean>
+
+    <bean id="TaxRate-history" parent="TaxRate-history-parentBean" />
+    <bean id="TaxRate-history-parentBean" abstract="true" parent="AttributeDefinition">
+        <property name="name" value="history" />
+        <property name="label" value="Show History" />
+        <property name="shortLabel" value="Show History" />
+        <property name="control">
+            <bean parent="RadioControlDefinition" p:valuesFinderClass="org.kuali.kpme.core.web.KpmeHistoryKeyValueFinder" />
+        </property>
+    </bean>
 
     <!-- Business Object Inquiry Definition -->
 
@@ -257,9 +274,6 @@
 							<bean parent="FieldDefinition" p:attributeName="country" />
 							<bean parent="FieldDefinition" p:attributeName="city" />
 							<bean parent="FieldDefinition" p:attributeName="state" />
-							<bean parent="FieldDefinition" p:attributeName="chart" />
-							<bean parent="FieldDefinition" p:attributeName="org" />
-							<bean parent="FieldDefinition" p:attributeName="payrollApproval" />
 							<bean parent="FieldDefinition" p:attributeName="active" />
                         </list>
                     </property>
@@ -319,7 +333,6 @@
 		        <bean parent="FieldDefinition" p:attributeName="state" />
 		        <bean parent="FieldDefinition" p:attributeName="city" />
 		        <bean parent="FieldDefinition" p:attributeName="history" p:defaultValue="N"/>
-		        <bean parent="FieldDefinition" p:attributeName="payrollApproval" />
 		        <bean parent="FieldDefinition" p:attributeName="active" />
             </list>
         </property>
@@ -329,7 +342,6 @@
 		        <bean parent="FieldDefinition" p:attributeName="state" />
 		        <bean parent="FieldDefinition" p:attributeName="city" />
 		        <bean parent="FieldDefinition" p:attributeName="timestamp" />
-		        <bean parent="FieldDefinition" p:attributeName="payrollApproval" />
 		        <bean parent="FieldDefinition" p:attributeName="active" />
             </list>
         </property>
@@ -347,7 +359,6 @@
 		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="state" />
 		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="city" />
 		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="history" p:defaultValue="N" />
-		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="payrollApproval" />
 		<bean parent="Uif-LookupCriteriaInputField" p:propertyName="active" p:defaultValue="Y" />
       </list>
     </property>
@@ -358,7 +369,6 @@
 		<bean parent="Uif-DataField" p:propertyName="state" />
 		<bean parent="Uif-DataField" p:propertyName="city" />
 		<bean parent="Uif-DataField" p:propertyName="timestamp" />
-		<bean parent="Uif-DataField" p:propertyName="payrollApproval" />
 		<bean parent="Uif-DataField" p:propertyName="active" />
       </list>
     </property>
