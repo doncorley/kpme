@@ -274,6 +274,11 @@
 							<bean parent="FieldDefinition" p:attributeName="country" />
 							<bean parent="FieldDefinition" p:attributeName="city" />
 							<bean parent="FieldDefinition" p:attributeName="state" />
+					        <bean parent="FieldDefinition" p:attributeName="maritalStatus" />
+					        <bean parent="FieldDefinition" p:attributeName="startDate" />
+					        <bean parent="FieldDefinition" p:attributeName="endDate" />
+					        <bean parent="FieldDefinition" p:attributeName="cutoffAmount" />
+					        <bean parent="FieldDefinition" p:attributeName="taxRate" />
 							<bean parent="FieldDefinition" p:attributeName="active" />
                         </list>
                     </property>
@@ -341,6 +346,11 @@
 		        <bean parent="FieldDefinition" p:attributeName="country" p:forceInquiry="true" />
 		        <bean parent="FieldDefinition" p:attributeName="state" />
 		        <bean parent="FieldDefinition" p:attributeName="city" />
+		        <bean parent="FieldDefinition" p:attributeName="maritalStatus" />
+		        <bean parent="FieldDefinition" p:attributeName="startDate" />
+		        <bean parent="FieldDefinition" p:attributeName="endDate" />
+		        <bean parent="FieldDefinition" p:attributeName="cutoffAmount" />
+		        <bean parent="FieldDefinition" p:attributeName="taxRate" />
 		        <bean parent="FieldDefinition" p:attributeName="timestamp" />
 		        <bean parent="FieldDefinition" p:attributeName="active" />
             </list>
@@ -368,6 +378,11 @@
 		<bean parent="Uif-DataField" p:propertyName="country" />
 		<bean parent="Uif-DataField" p:propertyName="state" />
 		<bean parent="Uif-DataField" p:propertyName="city" />
+        <bean parent="Uif-DataField" p:propertyName="maritalStatus" />
+        <bean parent="Uif-DataField" p:propertyName="startDate" />
+        <bean parent="Uif-DataField" p:propertyName="endDate" />
+        <bean parent="Uif-DataField" p:propertyName="cutoffAmount" />
+        <bean parent="Uif-DataField" p:propertyName="taxRate" />
 		<bean parent="Uif-DataField" p:propertyName="timestamp" />
 		<bean parent="Uif-DataField" p:propertyName="active" />
       </list>
