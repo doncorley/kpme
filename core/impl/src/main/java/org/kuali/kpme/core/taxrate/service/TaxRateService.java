@@ -15,6 +15,8 @@
  */
 package org.kuali.kpme.core.taxrate.service;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -23,7 +25,20 @@ import org.springframework.cache.annotation.Cacheable;
 
 public interface TaxRateService {
 	
-    /**
+	/**
+	 * Calculate the Income Tax this this employee.
+	 * @param country - Two letter country code
+	 * @param state - Two letter state/region code
+	 * @param city - Four letter IATA city code
+	 * @param maritalStatus - (S)ingle/(M)arried/(H)ead of Household/Married (F)iling separately
+	 * @param date - Pay date
+	 * @param days - Length of pay period in days
+	 * @param amount - Taxable amount
+	 * @return The calculated tax
+	 */
+	public BigDecimal getTax(String country, String state, String city, String maritalStatus, Date date, int days, BigDecimal amount);
+
+	/**
      * Fetch department by id
      * @param hrDeptId
      * @return

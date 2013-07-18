@@ -15,7 +15,9 @@
  */
 package org.kuali.kpme.core.taxrate.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -60,7 +62,28 @@ public class TaxRateServiceImpl implements TaxRateService {
 		return departmentObj;
 	}
 	
-    @Override
+	/**
+	 * Calculate the Income Tax this this employee.
+	 * @param country - Two letter country code
+	 * @param state - Two letter state/region code
+	 * @param city - Four letter IATA city code
+	 * @param maritalStatus - (S)ingle/(M)arried/(H)ead of Household/Married (F)iling separately
+	 * @param date - Pay date
+	 * @param days - Length of pay period in days
+	 * @param amount - Taxable amount
+	 * @return The calculated tax
+	 */
+	public BigDecimal getTax(String country, String state, String city, String maritalStatus, Date date, int days, BigDecimal amount)
+	{
+		BigDecimal taxes = BigDecimal.ZERO;
+		
+		// TODO - Read though the TaxRate file and calculate the tax amount
+		
+		return taxes;
+	}
+
+
+	@Override
     public List<TaxRate> getTaxRates(String userPrincipalId, String department, String location, String descr, String active, String showHistory) {
     	List<TaxRate> results = new ArrayList<TaxRate>();
     	
